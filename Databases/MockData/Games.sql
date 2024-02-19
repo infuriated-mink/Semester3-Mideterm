@@ -6,7 +6,7 @@ VALUES
 (4, 'Grand Theft Auto V', 'Action-adventure game set in an open world', '2013-09-17', 39.99, 3),
 (5, 'The Witcher 3: Wild Hunt', 'Open-world role-playing game', '2015-05-19', 49.99, 3),
 (6, 'Red Dead Redemption 2', 'Action-adventure game set in the Wild West', '2018-10-26', 59.99, 3),
-(7, 'Fortnite', 'Online battle royale game', '2017-07-25', 0, 2),
+(7, 'The Last of Us Part II', 'Action-adventure game set in a post-apocalyptic world', '2020-06-19', 59.99, 3),
 (8, 'Dark Souls', 'Difficult Single Player Action RPG', '2010-12-20', 79.99, 3),
 (9, 'Among Us', 'Multiplayer party game', '2018-06-15', 4.99, 1),
 (10, 'Call of Duty: Modern Warfare', 'First-person shooter game', '2019-10-25', 59.99, 3),
