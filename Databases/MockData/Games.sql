@@ -1,25 +1,27 @@
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (10, 'Assassin''s Creed', 'Mystery puzzle game', '8/4/2023', '$221.87', 3);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (7, 'Overwatch', 'Sci-fi thriller', '6/11/2023', '$306.83', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (25, 'Overwatch', 'Sci-fi thriller', '6/3/2023', '$33.18', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (14, 'Call of Duty', 'Fantasy RPG', '5/18/2023', '$299.63', 3);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (9, 'World of Warcraft', 'Horror survival', '9/14/2023', '$485.39', 2);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (3, 'League of Legends', 'Fantasy RPG', '1/10/2024', '$321.72', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (16, 'Grand Theft Auto', 'Mystery puzzle game', '2/5/2024', '$131.90', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (18, 'Call of Duty', 'Fantasy RPG', '1/24/2024', '$42.12', 3);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (23, 'Assassin''s Creed', 'Sci-fi thriller', '1/11/2024', '$232.12', 2);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (22, 'Minecraft', 'Mystery puzzle game', '12/14/2023', '$458.81', 2);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (11, 'Minecraft', 'Sci-fi thriller', '2/1/2024', '$35.54', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (22, 'Overwatch', 'Fantasy RPG', '12/29/2023', '$271.83', 2);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (19, 'Call of Duty', 'Horror survival', '11/30/2023', '$122.92', 3);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (22, 'World of Warcraft', 'Sci-fi thriller', '6/7/2023', '$353.70', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (5, 'World of Warcraft', 'Horror survival', '9/23/2023', '$405.76', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (23, 'Call of Duty', 'Action-packed adventure', '4/4/2023', '$384.47', 3);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (9, 'Assassin''s Creed', 'Mystery puzzle game', '11/18/2023', '$178.38', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (21, 'Super Mario Bros.', 'Horror survival', '12/1/2023', '$363.42', 2);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (25, 'Assassin''s Creed', 'Sci-fi thriller', '12/31/2023', '$135.10', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (19, 'The Legend of Zelda', 'Mystery puzzle game', '10/8/2023', '$61.97', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (7, 'World of Warcraft', 'Horror survival', '3/2/2023', '$113.80', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (6, 'Minecraft', 'Fantasy RPG', '11/29/2023', '$350.46', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (4, 'The Legend of Zelda', 'Horror survival', '9/16/2023', '$426.73', 1);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (7, 'Super Mario Bros.', 'Sci-fi thriller', '6/7/2023', '$186.69', 2);
-insert into Games (gameID, gameTitle, description, releaseDate, price, difficultyID) values (22, 'Grand Theft Auto', 'Mystery puzzle game', '8/30/2023', '$255.72', 3);
+INSERT INTO Games (gameID, gameTitle, description, releaseDate, price, difficultyID) 
+VALUES 
+(1, 'Super Mario Bros.', 'Classic platformer featuring Mario', '1985-09-13', 19.99, 1),
+(2, 'The Legend of Zelda: Breath of the Wild', 'Open-world action-adventure game', '2017-03-03', 59.99, 2),
+(3, 'Minecraft', 'Sandbox game where players build and explore', '2011-11-18', 29.99, 2),
+(4, 'Grand Theft Auto V', 'Action-adventure game set in an open world', '2013-09-17', 39.99, 3),
+(5, 'The Witcher 3: Wild Hunt', 'Open-world role-playing game', '2015-05-19', 49.99, 3),
+(6, 'Red Dead Redemption 2', 'Action-adventure game set in the Wild West', '2018-10-26', 59.99, 3),
+(7, 'The Last of Us Part II', 'Action-adventure game set in a post-apocalyptic world', '2020-06-19', 59.99, 3),
+(8, 'Dark Souls', 'Difficult Single Player Action RPG', '2010-12-20', 79.99, 3),
+(9, 'Among Us', 'Multiplayer party game', '2018-06-15', 4.99, 1),
+(10, 'Call of Duty: Modern Warfare', 'First-person shooter game', '2019-10-25', 59.99, 3),
+(11, 'FIFA 21', 'Football simulation game', '2020-10-09', 59.99, 2),
+(12, 'The Elder Scrolls V: Skyrim', 'Open-world action role-playing game', '2011-11-11', 39.99, 3),
+(13, 'Halo 3', 'Team-based multiplayer first-person shooter game', '2012-05-24', 39.99, 2),
+(14, 'Animal Crossing: New Horizons', 'Life simulation game', '2020-03-20', 49.99, 1),
+(15, 'Pokémon Sword and Shield', 'Role-playing game set in the Pokémon universe', '2019-11-15', 59.99, 2),
+(16, 'Super Smash Bros. Ultimate', 'Fighting game featuring various Nintendo characters', '2018-12-07', 59.99, 2),
+(17, 'Dark Souls II', 'Difficult Single Player Action RPG', '2012-02-29', 59.99, 3),
+(18, 'Dark Souls III', 'Difficult Single Player Action RPG', '2015-04-02', 79.99, 3),
+(19, 'Elden Ring', 'Difficult Single Player Action RPG', '2019-02-16', 79.99, 3),
+(20, 'Lies of P', 'Difficult Single Player Action RPG', '2023-11-16', 79.99, 3),
+(21, 'Sekiro: Shadows Die Twice', 'Difficult Single Player Action RPG', '2019-02-16', 79.99, 3),
+(22, 'Bloodborne', 'Difficult Single Player Action RPG', '2015-02-16', 79.99, 3),
+(23, 'Demon Souls', 'Difficult Single Player Action RPG', '2015-02-16', 79.99, 3),
+(24, 'Nioh', 'Difficult Single Player Action RPG', '2017-02-16', 79.99, 3),
+(25, 'Nioh 2', 'Difficult Single Player Action RPG', '2020-02-16', 79.99, 3)
