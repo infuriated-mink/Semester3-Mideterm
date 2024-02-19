@@ -1,9 +1,9 @@
-insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (98, 'Ulrica', 'Todaro', 51, 68, 'utodaro0@livejournal.com', '251-841-8388', '925-475-712', 23);
-insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (85, 'Georgie', 'Spier', 34, 19, 'gspier1@nbcnews.com', '161-935-3055', '540-963-664', 91);
-insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (44, 'Eustace', 'Twiddy', 38, 41, 'etwiddy2@technorati.com', '468-887-6925', '528-609-118', 26);
-insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (7, 'Abbe', 'Lavin', 53, 54, 'alavin3@bbb.org', '680-302-7514', '083-514-766', 80);
-insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (70, 'Elisha', 'Grigs', 83, 89, 'egrigs4@jalbum.net', '887-906-0353', '241-859-717', 78);
-insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (87, 'Mirabella', 'Hazel', 14, 75, 'mhazel5@slate.com', '255-747-8450', '968-174-514', 66);
+insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (98, 'Ulrica', 'Todaro', 1, 1, 'utodaro0@livejournal.com', '251-841-8388', '925-475-712', 23);
+insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (85, 'Georgie', 'Spier', 2, 19, 'gspier1@nbcnews.com', '161-935-3055', '540-963-664', 91);
+insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (44, 'Eustace', 'Twiddy', 3, 41, 'etwiddy2@technorati.com', '468-887-6925', '528-609-118', 26);
+insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (7, 'Abbe', 'Lavin', 3, 54, 'alavin3@bbb.org', '680-302-7514', '083-514-766', 80);
+insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (70, 'Elisha', 'Grigs', 4, 89, 'egrigs4@jalbum.net', '887-906-0353', '241-859-717', 78);
+insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (87, 'Mirabella', 'Hazel', 5, 75, 'mhazel5@slate.com', '255-747-8450', '968-174-514', 66);
 insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (88, 'Saunderson', 'Wasielewicz', 14, 7, 'swasielewicz6@tumblr.com', '851-954-2987', '447-400-728', 84);
 insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (34, 'Dayle', 'Arkin', 94, 98, 'darkin7@newsvine.com', '444-783-8451', '097-713-717', 45);
 insert into Employees (employeeID, firstName, lastName, positionID, addressID, email, phone, SIN, StoreID) values (70, 'Cullin', 'Zack', 33, 46, 'czack8@tamu.edu', '478-239-7747', '597-497-841', 23);

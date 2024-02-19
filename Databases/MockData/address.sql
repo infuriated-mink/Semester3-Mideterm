@@ -1,7 +1,7 @@
 insert into Address (addressID, street, city, province, postalCode) values (1, '9839 Dottie Circle', 'Temirtau', 'QC', 'G3I 6S2');
 insert into Address (addressID, street, city, province, postalCode) values (2, '15033 Caliangt Park', 'Lutian', 'NT', 'P4F 5M1');
-insert into Address (addressID, street, city, province, postalCode) values (3, '07087 Walton Plaza', 'Ashiya', 'BC', 'N6T 7F9');
-insert into Address (addressID, street, city, province, postalCode) values (4, '0 Gina Place', 'Gaoqiao', 'YT', 'H5R 5H3');
+insert into Address (addressID, street, city, province, postalCode) values (3, '7087 Walton Plaza', 'Ashiya', 'BC', 'N6T 7F9');
+insert into Address (addressID, street, city, province, postalCode) values (4, '10 Gina Place', 'Gaoqiao', 'YT', 'H5R 5H3');
 insert into Address (addressID, street, city, province, postalCode) values (5, '54214 Hoard Point', 'Ningtang', 'QC', 'J5R 9F4');
 insert into Address (addressID, street, city, province, postalCode) values (6, '81 Vernon Place', 'Catamayo', 'NU', 'N9K 0L1');
 insert into Address (addressID, street, city, province, postalCode) values (7, '4 Mockingbird Place', 'Brodarica', 'PE', 'M6U 9C5');
@@ -11,8 +11,8 @@ insert into Address (addressID, street, city, province, postalCode) values (10, 
 insert into Address (addressID, street, city, province, postalCode) values (11, '54 Ohio Avenue', 'Tangjiapo', 'AB', 'J0I 4K9');
 insert into Address (addressID, street, city, province, postalCode) values (12, '231 Kennedy Plaza', 'Shibirghān', 'ON', 'X8O 0K5');
 insert into Address (addressID, street, city, province, postalCode) values (13, '3 Manley Pass', 'Ngluwuk', 'NB', 'X3Q 0Y0');
-insert into Address (addressID, street, city, province, postalCode) values (14, '01 Bultman Center', 'Waekolong', 'QC', 'P5Q 4Z9');
-insert into Address (addressID, street, city, province, postalCode) values (15, '0 Fremont Court', 'Sovetskiy', 'NT', 'H4Z 5S9');
+insert into Address (addressID, street, city, province, postalCode) values (14, '1 Bultman Center', 'Waekolong', 'QC', 'P5Q 4Z9');
+insert into Address (addressID, street, city, province, postalCode) values (15, '150 Fremont Court', 'Sovetskiy', 'NT', 'H4Z 5S9');
 insert into Address (addressID, street, city, province, postalCode) values (16, '54497 Bonner Junction', 'Chaparral', 'NT', 'Q3X 1H4');
 insert into Address (addressID, street, city, province, postalCode) values (17, '84 Mosinee Circle', 'Lampari', 'QC', 'I8R 5G9');
 insert into Address (addressID, street, city, province, postalCode) values (18, '6468 Haas Alley', 'Liuliping', 'ON', 'H6N 8H1');
