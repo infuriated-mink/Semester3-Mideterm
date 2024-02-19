@@ -1,0 +1,10 @@
+insert into MOCK_DATA (genreID, genreName) values (1, 'Action');
+insert into MOCK_DATA (genreID, genreName) values (2, 'Adventure');
+insert into MOCK_DATA (genreID, genreName) values (3, 'RPG');
+insert into MOCK_DATA (genreID, genreName) values (4, 'FPS');
+insert into MOCK_DATA (genreID, genreName) values (5, 'Simulation');
+insert into MOCK_DATA (genreID, genreName) values (6, 'Strategy');
+insert into MOCK_DATA (genreID, genreName) values (7, 'Sports');
+insert into MOCK_DATA (genreID, genreName) values (8, 'Puzzle');
+insert into MOCK_DATA (genreID, genreName) values (9, 'Horror');
+insert into MOCK_DATA (genreID, genreName) values (10, 'MMORPG');

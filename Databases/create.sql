@@ -1,5 +1,3 @@
--- Purpose: Create the tables for the project required for Virtual Vault database.
-
 CREATE TABLE Defaults (
   gst INT
 );
@@ -22,14 +20,13 @@ CREATE TABLE Stores (
 
 CREATE TABLE Positions (
   positionID SERIAL PRIMARY KEY,
-  name VARCHAR,
+  positionName VARCHAR,
   storeID INT REFERENCES Stores (storeID)
 );
 
 CREATE TABLE Difficulty (
   difficultyID SERIAL PRIMARY KEY,
-  level VARCHAR,
-  description VARCHAR
+  difficultyLevel VARCHAR
 );
 
 CREATE TABLE Customers (
@@ -43,14 +40,14 @@ CREATE TABLE Customers (
 
 CREATE TABLE Consoles (
   consoleID SERIAL PRIMARY KEY,
-  name VARCHAR,
+  consoleName VARCHAR,
   manufacturer VARCHAR,
   releaseDate DATE
 );
 
 CREATE TABLE Games (
   gameID SERIAL PRIMARY KEY,
-  title VARCHAR,
+  gameTitle VARCHAR,
   description VARCHAR,
   releaseDate DATE,
   price MONEY,
@@ -84,7 +81,7 @@ CREATE TABLE TransactionDetails (
 
 CREATE TABLE Genres (
   genreID SERIAL PRIMARY KEY,
-  Name VARCHAR
+  genreName VARCHAR
 );
 
 CREATE TABLE GamesGenres (
