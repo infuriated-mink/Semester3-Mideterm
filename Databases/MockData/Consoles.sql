@@ -1,25 +1,7 @@
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (19, 'Nintendo Switch', 'Atari', '3/11/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (16, 'GameCube', 'Panasonic', '8/14/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (1, 'GameCube', 'NEC', '4/25/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (10, 'GameCube', 'Microsoft', '5/6/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (17, 'Nintendo Switch', 'Nintendo', '6/23/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (3, 'GameCube', 'Panasonic', '6/23/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (20, 'Xbox 360', 'Nintendo', '3/30/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (23, 'Xbox', 'Microsoft', '4/8/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (6, 'Atari 2600', 'Microsoft', '11/24/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (1, 'Atari 2600', 'Sony', '6/24/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (2, 'PlayStation 2', 'Nintendo', '12/9/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (1, 'GameCube', 'Sega', '2/17/2024');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (15, 'PC', 'Atari', '7/7/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (23, 'Wii', 'Sega', '5/22/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (4, 'Wii', 'Sega', '7/29/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (23, 'PC', 'Sega', '11/23/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (24, 'PlayStation', 'Sony', '9/25/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (2, 'Xbox 360', 'Sega', '5/30/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (2, 'GameCube', 'Sega', '9/30/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (21, 'Atari 2600', 'Sega', '3/5/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (3, 'Atari 2600', 'Panasonic', '4/7/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (13, 'Sega Genesis', 'Sony', '1/26/2024');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (23, 'PlayStation', 'NEC', '3/25/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (11, 'Atari 2600', 'Sony', '5/2/2023');
-insert into Consoles (consoleID, consoleName, manufacturer, releaseDate) values (5, 'Atari 2600', 'Philips', '12/9/2023');
+INSERT INTO Consoles (consoleID, consoleName, manufacturer, releaseDate) 
+VALUES 
+(1, 'PlayStation 5', 'Sony', '2020-11-12'),
+(2, 'Xbox Series X', 'Microsoft', '2020-11-10'),
+(3, 'Nintendo Switch OLED Model', 'Nintendo', '2021-10-08'),
+(4, 'Xbox One', 'Microsoft', '2013-11-22'),
+(5, 'PlayStation 4', 'Sony', '2013-11-15');
