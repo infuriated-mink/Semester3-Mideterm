@@ -6,7 +6,7 @@ CREATE TABLE Address (
   addressID SERIAL PRIMARY KEY,
   street VARCHAR,
   city VARCHAR,
-  province CHAR,
+  province VARCHAR,
   postalCode VARCHAR
 );
 
