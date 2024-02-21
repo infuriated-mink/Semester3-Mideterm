@@ -1,10 +1,19 @@
 {
-    "name": "{{projectName}}",
-    "version": "0.1.0",
-    "scripts": {
-        "start": "node init.js"
-    },
-    "dependencies": {
-        "express": "^4.17.1"
-    }
+  "name": "midtermsprint",
+  "version": "1.0.0",
+  "description": "Virtual Vault video game store",
+  "main": "myapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infuriated-mink/Semester3-Midterm.git"
+  },
+  "author": "Vanessa Dylan Evan Jacob",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/infuriated-mink/Semester3-Midterm/issues"
+  },
+  "homepage": "https://github.com/infuriated-mink/Semester3-Midterm#readme"
 }
