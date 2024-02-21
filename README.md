@@ -33,4 +33,3 @@ The Database Project folder contains the implementation of a relational database
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
