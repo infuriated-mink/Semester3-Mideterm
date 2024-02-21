@@ -15,7 +15,8 @@ This folder contains the implementation of a relational database system for a vi
 ### Defaults: Stores default settings such as the GST percentage.
 - `gst`: Stores the default GST (Goods and Services Tax) percentage.
 
-### Address: Contains addresses for stores and customers.- `addressID`: Primary key for the address table.
+### Address: Contains addresses for stores and customers.
+- `addressID`: Primary key for the address table.
 - `street`: Street address.
 - `city`: City name.
 - `province`: Province name.
