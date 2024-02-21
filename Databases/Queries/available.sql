@@ -1,4 +1,4 @@
--- Find Dark Souls games for Xbox One at all stores
+-- Purpose: This query is used to find the available stock of a game for a specific console in all stores.
 SELECT g.gameTitle, g.description, c.consoleName, gc.consoleID, i.quantity, s.storeName, a.street, a.city, a.province, a.postalCode
 FROM Games g
 JOIN GamesConsoles gc ON g.gameID = gc.gameID

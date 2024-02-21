@@ -1,4 +1,4 @@
--- Average Transaction amount for each customer
+-- Purpose: To get the average transaction amount for each customer.
 SELECT t.customerID, c.firstName, c.lastName, ROUND(AVG(t.paymentAmount::numeric), 2) AS avgTransactionAmount
 FROM Transactions t
 JOIN  Customers c ON t.customerID = c.customerID

@@ -1,4 +1,4 @@
--- sales that took place on 2023-02-25
+-- Purpose: To get the sales for a February 25th, 2023.
 SELECT t.transactionID, c.firstName, c.lastName, t.transactionDate, t.paymentAmount, s.storeName
 FROM Transactions t
 JOIN Customers c ON t.customerID = c.customerID

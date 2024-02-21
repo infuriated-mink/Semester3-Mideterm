@@ -1,4 +1,4 @@
--- Finds the most popular genres
+-- Purpose: Query to find the most popular genres of games sold in the store.
 SELECT g.genreName, SUM(td.units) AS totalUnitsSold
 FROM Genres g
 JOIN GamesGenres gg ON g.genreID = gg.genreID

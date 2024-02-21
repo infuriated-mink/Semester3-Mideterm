@@ -1,4 +1,4 @@
--- Identifies game with stock less than 10
+-- Purpose: This query is used to find all games that have a quantity of less than 10 in the inventory.
 SELECT g.gameTitle, i.quantity
 FROM Games g
 JOIN GamesConsoles gc ON g.gameID = gc.gameID

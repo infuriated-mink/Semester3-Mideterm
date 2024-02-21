@@ -1,4 +1,4 @@
--- Revenue of games sold 
+-- Purpose: This file contains the SQL query to retrieve the top 25 games by revenue.
 SELECT g.gameTitle, SUM(td.units) AS totalUnitsSold, SUM(td.units * g.price) AS totalRevenue
 FROM Games g
 JOIN GamesConsoles gc ON g.gameID = gc.gameID

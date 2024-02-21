@@ -1,4 +1,4 @@
--- Total revenue for each store
+-- Purpose: Get the total revenue for each store.
 SELECT s.storeName, SUM(t.paymentAmount) AS totalRevenue
 FROM Stores s
 JOIN Inventory i ON s.storeID = i.storeID
