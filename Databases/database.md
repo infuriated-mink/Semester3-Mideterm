@@ -12,7 +12,7 @@ Our extensive collection of video games is meticulously curated to ensure that y
 
 This folder contains the implementation of a relational database system for a virtual video game store called Virtual Vault. The database schema consists of various tables to manage different aspects of the video game store, including inventory, customers, transactions, employees, and more.
 
-![ERD](Databases/Semester3-Midterm.jpeg)
+![ERD](/Users/keyinstudent/Documents/GitHub/Semester3-Mideterm/Databases/Semester3-Midterm.jpeg)
 
 ## Tables
 
