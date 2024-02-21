@@ -1,0 +1,1 @@
+insert into Defaults (gst) values (15);

@@ -1,0 +1,10 @@
+insert into Genres (genreID, genreName) values (1, 'Action');
+insert into Genres (genreID, genreName) values (2, 'Adventure');
+insert into Genres (genreID, genreName) values (3, 'RPG');
+insert into Genres (genreID, genreName) values (4, 'FPS');
+insert into Genres (genreID, genreName) values (5, 'Simulation');
+insert into Genres (genreID, genreName) values (6, 'Strategy');
+insert into Genres (genreID, genreName) values (7, 'Sports');
+insert into Genres (genreID, genreName) values (8, 'Puzzle');
+insert into Genres (genreID, genreName) values (9, 'Horror');
+insert into Genres (genreID, genreName) values (10, 'MMORPG');
