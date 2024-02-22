@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { EventEmitter } = require("events");
-const { config } = require("yargs");
+
 
 const configjson = require("./templates").configjson;
 const myArgs = process.argv.slice(2);
@@ -12,22 +12,29 @@ class MyEmitter extends EventEmitter {}
 
 const myEmitter = new MyEmitter();
 
-myEmitter.on("log", (event, level, msg) => logEvents(events, level, msg));
+// Function to log events
+function logEvents(event, level, msg) {
+  console.log(`[${event}] [${level}] ${msg}`);
+}
 
+myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
+
+// Function to display configuration
 function displayConfig() {
   if (DEBUG) console.log("config.displayConfig()");
   fs.readFile(path.join(__dirname, "json", "config.json"), (error, data) => {
     if (error) throw error;
     console.log(JSON.parse(data));
+    myEmitter.emit(
+      "log",
+      "config.displayConfig()",
+      "INFO",
+      "config.json displayed"
+    );
   });
-  myEmitter.emit(
-    "log",
-    "config.displayConfig()",
-    "INFO",
-    "config.json displayed"
-  );
 }
 
+// Function to reset configuration
 function resetConfig() {
   if (DEBUG) console.log("config.resetConfig()");
   const configdata = JSON.stringify(configjson, null, 2);
@@ -47,6 +54,7 @@ function resetConfig() {
   );
 }
 
+// Function to set configuration
 function setConfig() {
   if (DEBUG) console.log("config.setConfig()");
   const args = process.argv.slice(2);
@@ -55,7 +63,7 @@ function setConfig() {
     if (error) throw error;
     if (DEBUG) console.log(JSON.parse(data));
     const cfg = JSON.parse(data);
-    for (const key of Object.key(cfg)) {
+    for (const key of Object.keys(cfg)) { 
       if (key === args[2]) {
         cfg[key] = args[3];
         match = true;
@@ -85,6 +93,7 @@ function setConfig() {
   });
 }
 
+// Function to handle CLI configuration
 function configApp() {
   if (DEBUG) console.log("configApp()");
   myEmitter.emit(
