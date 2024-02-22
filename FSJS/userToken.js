@@ -29,6 +29,8 @@ class myEmitter extends EventEmitter {}
 
 const MyEmitter = new myEmitter();
 myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
+const myEmitter = new MyEmitter();
+myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
 
 const fs = require("fs");
 const path = require("path");
