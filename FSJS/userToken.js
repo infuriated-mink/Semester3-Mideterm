@@ -21,6 +21,8 @@
  * - myapp token --search p <phone>
  * -
  */
+const express = require('express');
+const app = express();
 
 const logEvents = require("./logEvents");
 
@@ -259,8 +261,11 @@ function tokenApp() {
 }
 
 module.exports = {
+  app,
   tokenApp,
   newToken,
   tokenCount,
   fetchRecord,
+  searchToken,
+
 };
