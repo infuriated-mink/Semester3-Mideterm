@@ -25,10 +25,10 @@
 const logEvents = require("./logEvents");
 
 const EventEmitter = require("events");
-class MyEmitter extends EventEmitter {}
+class myEmitter extends EventEmitter {}
 
-const MyEmitter = new MyEmitter();
-MyEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
+const MyEmitter = new myEmitter();
+myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
 
 const fs = require("fs");
 const path = require("path");
