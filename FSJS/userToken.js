@@ -21,51 +21,34 @@
  * - myapp token --search p <phone>
  * -
  */
-const express = require('express');
-const app = express();
 
 const logEvents = require("./logEvents");
-
-const EventEmitter = require("events");
-class MyEmitter extends EventEmitter {}
-
-const myEmitter = new MyEmitter();
-myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
-
+const { format } = require("date-fns");
 const fs = require("fs");
 const path = require("path");
-
 const crc32 = require("crc/crc32");
-const { format } = require("date-fns");
+const { EventEmitter } = require("events");
+
+const myEmitter = new EventEmitter();
+myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
 
 const myArgs = process.argv.slice(2);
 
-// Endpoint for handling form submission
-app.post("/generateToken", (req, res) => {
-  const username = req.body.username;
-  const token = newToken(username); // Generate new token
-  res.send(`Your token: ${token}`); // Respond with the generated token
-});
-
-// Route for displaying the form
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/form.html");
-});
-
-var tokenCount = function () {
+// Function to count the number of tokens in the system
+const tokenCount = function () {
   if (DEBUG) console.log("token.tokenCount()");
   return new Promise(function (resolve, reject) {
     fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
       if (error) reject(error);
       else {
         let tokens = JSON.parse(data);
-        let count = Object.keys(tokens).length;
-        console.log(`Gamers with tokens; ${count}.`);
+        let count = tokens.length;
+        console.log(`Gamers with tokens: ${count}.`);
         myEmitter.emit(
           "log",
           "token.tokenCount()",
           "INFO",
-          `Token count ${count}.`
+          `Token count: ${count}.`
         );
         resolve(count);
       }
@@ -73,7 +56,7 @@ var tokenCount = function () {
   });
 };
 
-// function to list all tokens
+// Function to list all tokens
 function tokenList() {
   if (DEBUG) console.log("token.tokenCount()");
   fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
@@ -81,7 +64,7 @@ function tokenList() {
     let tokens = JSON.parse(data);
     console.log("** User List **");
     tokens.forEach((obj) => {
-      console.log(" * " + obj.username + ": " + obj.token);
+      console.log(` * ${obj.username}: ${obj.token}`);
     });
     myEmitter.emit(
       "log",
@@ -92,20 +75,19 @@ function tokenList() {
   });
 }
 
-//function ot generate a new token for the web user
-
+// Function to generate a new token for a user
 function newToken(username) {
   if (DEBUG) console.log("token.newToken()");
 
-  let newToken = JSON.parse(`{
-        "created": "1969-01-31 12:30:00",
-        "username": "username",
-        "email": "user@example.com",
-        "phone": "5556597890",
-        "token": "token",
-        "expires": "1969-02-03 12:30:00",
-        "confirmed": "tbd"
-    }`);
+  let newToken = {
+    created: "1969-01-31 12:30:00",
+    username: "username",
+    email: "user@example.com",
+    phone: "5556597890",
+    token: "token",
+    expires: "1969-02-03 12:30:00",
+    confirmed: "tbd",
+  };
 
   let now = new Date();
   let expires = addDays(now, 3);
@@ -113,7 +95,6 @@ function newToken(username) {
   newToken.created = `${format(now, "yyyy-MM-dd HH:mm:ss")}`;
   newToken.username = username;
   newToken.token = crc32(username).toString(16);
-  newToken.expires = `${format(expires, "yyyy-MM-dd HH:mm:ss")}`;
   fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
     if (error) throw error;
     let tokens = JSON.parse(data);
@@ -136,7 +117,7 @@ function newToken(username) {
   return newToken.token;
 }
 
-// function for user to update their token record
+// Function to update a token record for a user
 function updateToken(argv) {
   if (DEBUG) console.log("token.updateToken()");
   if (DEBUG) console.log(argv);
@@ -177,7 +158,7 @@ function updateToken(argv) {
   });
 }
 
-// function to fetch a token record
+// Function to fetch a token record for a user
 var fetchRecord = function (username) {
   if (DEBUG) console.log("token.fetchRecord()");
   fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
@@ -199,7 +180,7 @@ var fetchRecord = function (username) {
   });
 };
 
-// function to search for a token
+// Function to search for a token
 function searchToken() {
   if (DEBUG) console.log("token.searchToken()");
   myEmitter.emit(
@@ -210,12 +191,14 @@ function searchToken() {
   );
 }
 
+// Function to add days to a date
 function addDays(date, days) {
   var result = new Date(date);
   result.setDate(result.getDate() + days);
   return result;
 }
 
+// Function to manage the CLI options for the token module
 function tokenApp() {
   if (DEBUG) console.log("tokenApp()");
   myEmitter.emit(
@@ -261,11 +244,9 @@ function tokenApp() {
 }
 
 module.exports = {
-  app,
   tokenApp,
   newToken,
   tokenCount,
   fetchRecord,
   searchToken,
-
 };
