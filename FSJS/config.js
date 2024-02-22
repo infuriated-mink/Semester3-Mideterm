@@ -134,4 +134,10 @@ function configApp() {
 
 module.exports = {
   configApp,
+  displayConfig,
+  resetConfig,
+  setConfig,
+  logEvents,
+  MyEmitter,
+
 };
