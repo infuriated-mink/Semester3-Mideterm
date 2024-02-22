@@ -2,7 +2,6 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-const chalk = require('chalk');
 const yargs = require('yargs');
 
 // Define templates
@@ -38,7 +37,7 @@ const args = yargs
 // Helper function to log messages with different levels
 const log = (level, message) => {
     const date = new Date().toISOString();
-    console.log(`[${chalk.gray(date)}] [${chalk.bold(level)}] ${message}`);
+    console.log(`[${date}] [${level}] ${message}`);
 };
 
 // Helper function to create folders
