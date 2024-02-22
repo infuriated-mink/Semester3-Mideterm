@@ -22,7 +22,7 @@ myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
 function displayConfig() {
   if (DEBUG) console.log("config.displayConfig()");
   fs.readFile(
-    path.join(__dirname, "json", "FSJS/json/config.json"),
+    path.join(__dirname, "json", "./json/config.json"),
     (error, data) => {
       if (error) throw error;
       console.log(JSON.parse(data));
