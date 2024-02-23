@@ -2,7 +2,7 @@ global.DEBUG = false;
 const fs = require("fs");
 const { initializeApp } = require("./init.js");
 const { configApp } = require("./config.js");
-const { tokenApp, app } = require("./userToken.js"); 
+const { tokenApp, app } = require("./userToken.js");
 const myArgs = process.argv.slice(2);
 if (DEBUG) if (myArgs.length > 1) console.log("the myapp.args: ", myArgs);
 
@@ -30,6 +30,5 @@ switch (myArgs[0]) {
       console.log(data.toString());
     });
 }
-
 
 console.log(app);

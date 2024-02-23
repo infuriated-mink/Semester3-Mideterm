@@ -21,19 +21,16 @@ myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
 // Function to display configuration
 function displayConfig() {
   if (DEBUG) console.log("config.displayConfig()");
-  fs.readFile(
-    path.join(__dirname, "json", "./config.json"),
-    (error, data) => {
-      if (error) throw error;
-      console.log(JSON.parse(data));
-      myEmitter.emit(
-        "log",
-        "config.displayConfig()",
-        "INFO",
-        "config.json displayed"
-      );
-    }
-  );
+  fs.readFile(path.join(__dirname, "json", "./config.json"), (error, data) => {
+    if (error) throw error;
+    console.log(JSON.parse(data));
+    myEmitter.emit(
+      "log",
+      "config.displayConfig()",
+      "INFO",
+      "config.json displayed"
+    );
+  });
 }
 
 // Function to reset configuration
