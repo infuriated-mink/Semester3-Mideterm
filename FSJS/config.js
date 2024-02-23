@@ -38,7 +38,7 @@ function resetConfig() {
   if (DEBUG) console.log("config.resetConfig()");
   const configdata = JSON.stringify(configjson, null, 2);
   fs.writeFile(
-    path.join(__dirname, "json", "config.json"),
+    path.join(__dirname, "json", "./config.json"),
     configdata,
     (error) => {
       if (error) throw error;
@@ -58,7 +58,7 @@ function setConfig() {
   if (DEBUG) console.log("config.setConfig()");
   const args = process.argv.slice(2);
   let match = false;
-  fs.readFile(path.join(__dirname, "json", "config.json"), (error, data) => {
+  fs.readFile(path.join(__dirname, "json", "./config.json"), (error, data) => {
     if (error) throw error;
     if (DEBUG) console.log(JSON.parse(data));
     const cfg = JSON.parse(data);
@@ -79,7 +79,7 @@ function setConfig() {
     }
     if (DEBUG) console.log(cfg);
     data = JSON.stringify(cfg, null, 2);
-    fs.writeFile(path.join(__dirname, "json", "config.json"), data, (error) => {
+    fs.writeFile(path.join(__dirname, "json", "./config.json"), data, (error) => {
       if (error) throw error;
       if (DEBUG) console.log("Config file successfully updated.");
       myEmitter.emit(

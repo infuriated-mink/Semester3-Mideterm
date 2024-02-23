@@ -21,7 +21,6 @@
  * - myapp token --search p <phone>
  * -
  */
-
 const logEvents = require("./logEvents");
 const { format } = require("date-fns");
 const fs = require("fs");
@@ -249,4 +248,5 @@ module.exports = {
   tokenCount,
   fetchRecord,
   searchToken,
+  updateToken
 };
