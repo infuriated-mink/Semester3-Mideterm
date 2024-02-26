@@ -1,4 +1,4 @@
--- Purpose: Query to retrieve the employee with the phone number '957-987-9735'
-SELECT *
+-- Query to retrieve employee information based on phone number
+SELECT firstName, lastName, positionID, phone, storeID
 FROM Employees
 WHERE phone = '957-987-9735';
