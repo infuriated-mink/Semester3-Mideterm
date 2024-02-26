@@ -21,7 +21,7 @@ The FullStack JavaScript (FSJS) Project folder contains a comprehensive implemen
 
 2. **Database Project Setup**: Navigate to the Database Project folder and follow the instructions in the README file to set up and manage the database [here](https://github.com/infuriated-mink/Semester3-Midterm/blob/main/Databases/database.md).
 
-3. **FSJS Project Setup**: Navigate to the FSJS Project folder and follow the instructions in the README file to set up and run the full-stack JavaScript web application [here](https://github.com/infuriated-mink/Semester3-Midterm/tree/main/FSJS/FSJS.md)
+3. **FSJS Project Setup**: Navigate to the FSJS Project folder and follow the instructions in the README file to set up and run the full-stack JavaScript web application [here](https://github.com/infuriated-mink/Semester3-Midterm/blob/issues/FSJS/FSJS.md)
 
 4. **Customization**: Customize both projects as needed to fit your requirements. You can modify the database schema, SQL queries, frontend components, backend logic, and more.
 
