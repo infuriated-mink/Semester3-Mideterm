@@ -31,5 +31,3 @@ switch (myArgs[0]) {
       console.log(data.toString());
     });
 }
-
-console.log(app);
