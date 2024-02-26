@@ -10,26 +10,33 @@ const server = http.createServer(async (req, res) => {
     case "/":
       path += "index.html";
       res.statusCode = 200;
-      fetchFile(path);
+      fetchFile(path, res);
       break;
     case "/new":
       if (req.method === "POST") {
         collectRequestData(req, (result) => {
-          var theToken = newToken(result.username);
-          res.end(`
-                    <!doctype html>
-                    <html>
-                    <body>
-                        ${result.username} token is ${theToken} <br />
-                        <a href="http://localhost:3000">[home]</a>
-                    </body>
-                    </html>
-                `);
+          newToken(result.username, (error, theToken) => {
+            if (error) {
+              console.error("Error generating token:", error);
+              res.statusCode = 500;
+              res.end("Error generating token");
+            } else {
+              res.end(`
+                <!doctype html>
+                <html>
+                <body>
+                    ${result.username} token is ${theToken} <br />
+                    <a href="http://localhost:3000">[home]</a>
+                </body>
+                </html>
+              `);
+            }
+          });
         });
       } else {
         path += "newusertoken.html";
         res.statusCode = 200;
-        fetchFile(path);
+        fetchFile(path, res);
       }
       break;
     case "/count":
@@ -43,25 +50,31 @@ const server = http.createServer(async (req, res) => {
                 </body>
                 </html>
             `);
-    default:
       break;
-  }
-
-  function fetchFile(path) {
-    fs.readFile(path, function (err, data) {
-      if (err) {
-        console.log(err);
-        res.end();
-      } else {
-        if (DEBUG) console.log("file was served.");
-        res.writeHead(res.statusCode, { "Content-Type": "text/html" });
-        res.write(data);
-        res.end();
-      }
-    });
+    default:
+      res.statusCode = 404;
+      res.end("Not Found");
   }
 });
-server.listen(3000);
+
+server.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
+});
+
+function fetchFile(path, res) {
+  fs.readFile(path, (err, data) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      res.statusCode = 500;
+      res.end("Internal Server Error");
+    } else {
+      if (DEBUG) console.log("File was served.");
+      res.writeHead(res.statusCode, { "Content-Type": "text/html" });
+      res.write(data);
+      res.end();
+    }
+  });
+}
 
 function collectRequestData(request, callback) {
   const FORM_URLENCODED = "application/x-www-form-urlencoded";
