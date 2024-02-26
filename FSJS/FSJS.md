@@ -67,7 +67,6 @@ node server.js
 Once the application is running, you can perform the following actions:
 
 - Generate a new token for a user.
-- View the list of all tokens.
 - Count the total number of tokens in the system.
 - Update an existing token record.
 - Fetch a token record for a specific user.
