@@ -101,7 +101,7 @@ function newToken(username, callback) {
 
     let tokens = JSON.parse(data);
     tokens.push(newToken);
-    let userTokens = JSON.stringify(newToken);
+    let userTokens = JSON.stringify(tokens);
 
     fs.writeFile(__dirname + "/json/tokens.json", userTokens, (err) => {
       if (err) {
