@@ -1,6 +1,14 @@
 # Semester3-Midterm
 
 ---
+# Table of Contents
+
+1. [Overview](#overview)
+   - [Database Project](#database-project)
+   - [FullStack JavaScript (FSJS) Project](#fullstack-javascript-fsjs-project)
+2. [Usage](#usage)
+3. [Contributors](#contributors)
+4. [License](#license)
 
 ## Overview
 
