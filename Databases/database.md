@@ -1,6 +1,29 @@
 # Virtual Vault Database Project
 
 ---
+## Table of Contents
+
+- [Business Idea](#business-idea)
+- [Database Overview](#database-overview)
+- [Tables](#tables)
+  - [Defaults](#defaults)
+  - [Address](#address)
+  - [Stores](#stores)
+  - [Positions](#positions)
+  - [Difficulty](#difficulty)
+  - [Customers](#customers)
+  - [Consoles](#consoles)
+  - [Games](#games)
+  - [Inventory](#inventory)
+  - [Transactions](#transactions)
+  - [TransactionDetails](#transactiondetails)
+  - [Genres](#genres)
+  - [GamesGenres](#gamesgenres)
+  - [GamesConsoles](#gamesconsoles)
+  - [Employees](#employees)
+- [Usage](#usage)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## Business Idea
 
