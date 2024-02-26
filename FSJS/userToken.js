@@ -76,7 +76,7 @@ function tokenList() {
 }
 
 // Function to generate a new token for a user
-function newToken(username, callback) {
+function newToken(username) {
   let newToken = {
     created: "1969-01-31 12:30:00",
     username: username,
@@ -96,7 +96,12 @@ function newToken(username, callback) {
   fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
     if (error) {
       console.error("Error reading tokens.json:", error);
-      return callback(error, null);
+      myEmitter.emit(
+        "log",
+        "token.newToken()",
+        "ERROR",
+        "Error reading tokens.json."
+      );
     }
 
     let tokens = JSON.parse(data);
@@ -106,11 +111,15 @@ function newToken(username, callback) {
     fs.writeFile(__dirname + "/json/tokens.json", userTokens, (err) => {
       if (err) {
         console.error("Error writing to tokens.json:", err);
-        return callback(err, null);
+        myEmitter.emit(
+          "log",
+          "token.newToken()",
+          "ERROR",
+          "Error reading tokens.json."
+        );
       }
 
       console.log(`New token ${newToken.token} was created for ${username}.`);
-      callback(null, newToken.token);
     });
   });
 }
@@ -196,15 +205,42 @@ var fetchRecord = function (username) {
 };
 
 // Function to search for a token
-function searchToken() {
+var searchToken = function (username, email, phone) {
   if (DEBUG) console.log("token.searchToken()");
-  myEmitter.emit(
-    "log",
-    "token.searchToken()",
-    "INFO",
-    `Token was found for xxx.`
-  );
-}
+  fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
+    if (error) console.log(error);
+    else {
+      let tokens = JSON.parse(data);
+      tokens.forEach((obj) => {
+        if (obj.username === username) {
+          console.log(obj);
+          myEmitter.emit(
+            "log",
+            "token.searchToken()",
+            "INFO",
+            `Token ${obj.token} for ${username} was displayed.`
+          );
+        } else if (obj.email === email) {
+          console.log(obj);
+          myEmitter.emit(
+            "log",
+            "token.searchToken()",
+            "INFO",
+            `Token ${obj.token} for ${email} was displayed.`
+          );
+        } else if (obj.phone === phone) {
+          console.log(obj);
+          myEmitter.emit(
+            "log",
+            "token.searchToken()",
+            "INFO",
+            `Token ${obj.token} for ${phone} was displayed.`
+          );
+        }
+      });
+    }
+  });
+};
 
 // Function to add days to a date
 function addDays(date, days) {
@@ -240,7 +276,9 @@ function tokenApp() {
       fetchRecord(myArgs[2]);
       break;
     case "--search":
-      searchToken();
+      if (myArgs[2] === "u") searchToken(myArgs[3]);
+      else if (myArgs[2] === "e") searchToken(null, myArgs[3]);
+      else if (myArgs[2] === "p") searchToken(null, null, myArgs[3]);
       break;
     case "--help":
     case "--h":
