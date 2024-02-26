@@ -3,7 +3,7 @@ const { initializeApp } = require("./init.js");
 const { configApp } = require("./config.js");
 const { tokenApp, app } = require("./userToken.js");
 const myArgs = process.argv.slice(2);
-const DEBUG = true; // Define DEBUG here
+global.DEBUG = true;
 
 if (DEBUG && myArgs.length > 1) console.log("the myapp.args: ", myArgs);
 
