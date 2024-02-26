@@ -75,12 +75,10 @@ function tokenList() {
 }
 
 // Function to generate a new token for a user
-function newToken(username) {
-  if (DEBUG) console.log("token.newToken()");
-
+function newToken(username, callback) {
   let newToken = {
     created: "1969-01-31 12:30:00",
-    username: "username",
+    username: username,
     email: "user@example.com",
     phone: "5556597890",
     token: "token",
@@ -92,28 +90,45 @@ function newToken(username) {
   let expires = addDays(now, 3);
 
   newToken.created = `${format(now, "yyyy-MM-dd HH:mm:ss")}`;
-  newToken.username = username;
   newToken.token = crc32(username).toString(16);
+
   fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
-    if (error) throw error;
+    if (error) {
+      console.error("Error reading tokens.json:", error);
+      return callback(error, null);
+    }
+
     let tokens = JSON.parse(data);
     tokens.push(newToken);
-    userTokens = JSON.stringify(tokens);
+    let userTokens = JSON.stringify(tokens);
 
     fs.writeFile(__dirname + "/json/tokens.json", userTokens, (err) => {
-      if (err) console.log(err);
-      else {
-        console.log(`New token ${newToken.token} was created for ${username}.`);
-        myEmitter.emit(
-          "log",
-          "token.newToken()",
-          "INFO",
-          `New token ${newToken.token} was created for ${username}.`
-        );
+      if (err) {
+        console.error("Error writing to tokens.json:", err);
+        return callback(err, null);
       }
+
+      console.log(`New token ${newToken.token} was created for ${username}.`);
+      callback(null, newToken.token);
     });
   });
-  return newToken.token;
+}
+
+// Callback function to handle the result of generating a new token
+function handleNewTokenResult(error, token) {
+  if (error) {
+    console.error("Error generating new token:", error);
+    document.getElementById("token").textContent = "Error generating token";
+  } else {
+    console.log("New token generated successfully:", token);
+    document.getElementById("token").textContent = token;
+  }
+}
+
+// Function to be called when the form is submitted
+function generateToken() {
+  var username = document.getElementById("username").value;
+  newToken(username, handleNewTokenResult);
 }
 
 // Function to update a token record for a user
@@ -248,5 +263,6 @@ module.exports = {
   tokenCount,
   fetchRecord,
   searchToken,
-  updateToken
+  updateToken,
+  generateToken,
 };
