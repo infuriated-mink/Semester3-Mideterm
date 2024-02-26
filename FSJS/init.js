@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { promisify } = require("util");
 const fsPromises = require("fs").promises;
 const yargs = require("yargs");
 const express = require("express");
@@ -8,43 +7,6 @@ const app = express();
 const port = 3000;
 const { folders, configjson, tokenjson } = require("./templates");
 global.DEBUG = true;
-
-// Define templates
-// const templates = {
-//   folders: ["Database Project", "FullStack JavaScript (FSJS) Project"],
-//   configjson: {
-//     // Example configuration JSON template
-//     database: {
-//       host: "localhost",
-//       port: 3000,
-//       username: "root",
-//       password: "password",
-//       database: "virtual_vault",
-//     },
-//     server: {
-//       port: 3000,
-//       logging: true,
-//       environment: "development",
-//     },
-//   },
-//   tokenjson: {
-//     // Example token JSON template
-//     tokens: [
-//       {
-//         username: "example_user",
-//         token: "abcdef123456",
-//         expires: "2024-12-31 23:59:59",
-//         permissions: ["read", "write"],
-//       },
-//       {
-//         username: "another_user",
-//         token: "789ghi456jkl",
-//         expires: "2024-12-31 23:59:59",
-//         permissions: ["read"],
-//       },
-//     ],
-//   },
-// };
 
 // Initialize the command line arguments parser
 const args = yargs
@@ -70,65 +32,6 @@ const log = (level, message) => {
   const date = new Date().toISOString();
   console.log(`[${date}] [${level}] ${message}`);
 };
-
-// Helper function to create folders
-// const createFolders = async () => {
-//   let foldersCreatedCount = 0;
-
-//   for (const folder of templates.folders) {
-//     const folderPath = path.join(__dirname, folder);
-
-//     if (!fs.existsSync(folderPath)) {
-//       await promisify(fs.mkdir)(folderPath);
-//       foldersCreatedCount++;
-//     }
-//   }
-
-//   if (foldersCreatedCount > 0) {
-//     log("INFO", `${foldersCreatedCount} folder(s) created.`);
-//   } else {
-//     log("INFO", "All folders already exist.");
-//   }
-// };
-
-// // Helper function to create files
-// const createFiles = async () => {
-//   const createFile = async (filePath, data) => {
-//     if (!fs.existsSync(filePath)) {
-//       await promisify(fs.writeFile)(filePath, data);
-//       log("INFO", `${filePath} created.`);
-//     } else {
-//       log("INFO", `${filePath} already exists.`);
-//     }
-//   };
-
-//   await createFile(
-//     path.join(__dirname, "./json/config.json"),
-//     JSON.stringify(templates.configjson, null, 2)
-//   );
-//   await createFile(
-//     path.join(__dirname, "./json/token.json"),
-//     JSON.stringify(templates.tokenjson, null, 2)
-//   );
-//   await createFile(
-//     path.join(__dirname, "./views/usage.json"),
-//     templates.usagetxt
-//   );
-//   await createFile(
-//     path.join(__dirname, "./views/init.json"),
-//     templates.inittxt
-//   );
-//   await createFile(
-//     path.join(__dirname, "./views/config.json"),
-//     templates.configtxt
-//   );
-//   await createFile(
-//     path.join(__dirname, "./views/token.json"),
-//     templates.tokentxt
-//   );
-// };
-
-// ************************************************************
 
 function createFolders() {
   if (DEBUG) console.log("init.createFolders()");
@@ -187,21 +90,6 @@ function createFiles() {
 
 const myArgs = process.argv.slice(2);
 
-// Initialize application
-// const initializeApp = () => {
-//   if (myArgs[1] === "--all") {
-//     createFolders();
-//     createFiles();
-//   } else if (myArgs[1] === "--mk") {
-//     createFolders();
-//   } else if (myArgs[1] === "--cat") {
-//     createFiles();
-//   } else {
-//     console.log(
-//       fs.readFileSync(path.join(__dirname, "./views/init.txt"), "utf-8")
-//     );
-//   }
-
 function initializeApp() {
   if (DEBUG) console.log("initializeApp()");
 
@@ -238,12 +126,5 @@ function initializeApp() {
     console.log(`Server is running on http://localhost:${port}`);
   });
 }
-
-// // Run the application
-// try {
-//   initializeApp();
-// } catch (error) {
-//   myEmitter.emit("log", "init.initializeApp()", "ERROR", error.message);
-// }
 
 module.exports = { initializeApp };

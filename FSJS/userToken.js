@@ -78,12 +78,12 @@ function tokenList() {
 // Function to generate a new token for a user
 function newToken(username) {
   let newToken = {
-    created: "1969-01-31 12:30:00",
+    created: "2000-01-01 12:30:00",
     username: username,
-    email: "user@example.com",
-    phone: "5556597890",
+    email: "default@gmail.com",
+    phone: "9999999999",
     token: "token",
-    expires: "1969-02-03 12:30:00",
+    expires: "2024-03-22 12:30:00",
     confirmed: "tbd",
   };
 
