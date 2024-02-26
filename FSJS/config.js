@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const { EventEmitter } = require("events");
 
-
 const configjson = require("./templates").configjson;
 const myArgs = process.argv.slice(2);
 
@@ -22,7 +21,7 @@ myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
 // Function to display configuration
 function displayConfig() {
   if (DEBUG) console.log("config.displayConfig()");
-  fs.readFile(path.join(__dirname, "json", "config.json"), (error, data) => {
+  fs.readFile(path.join(__dirname, "json", "./config.json"), (error, data) => {
     if (error) throw error;
     console.log(JSON.parse(data));
     myEmitter.emit(
@@ -39,7 +38,7 @@ function resetConfig() {
   if (DEBUG) console.log("config.resetConfig()");
   const configdata = JSON.stringify(configjson, null, 2);
   fs.writeFile(
-    path.join(__dirname, "json", "config.json"),
+    path.join(__dirname, "json", "./config.json"),
     configdata,
     (error) => {
       if (error) throw error;
@@ -59,11 +58,11 @@ function setConfig() {
   if (DEBUG) console.log("config.setConfig()");
   const args = process.argv.slice(2);
   let match = false;
-  fs.readFile(path.join(__dirname, "json", "config.json"), (error, data) => {
+  fs.readFile(path.join(__dirname, "json", "./config.json"), (error, data) => {
     if (error) throw error;
     if (DEBUG) console.log(JSON.parse(data));
     const cfg = JSON.parse(data);
-    for (const key of Object.keys(cfg)) { 
+    for (const key of Object.keys(cfg)) {
       if (key === args[2]) {
         cfg[key] = args[3];
         match = true;
@@ -80,16 +79,20 @@ function setConfig() {
     }
     if (DEBUG) console.log(cfg);
     data = JSON.stringify(cfg, null, 2);
-    fs.writeFile(path.join(__dirname, "json", "config.json"), data, (error) => {
-      if (error) throw error;
-      if (DEBUG) console.log("Config file successfully updated.");
-      myEmitter.emit(
-        "log",
-        "config.setConfig()",
-        "INFO",
-        `config.json "${args[2]}": updated to "${args[3]}"`
-      );
-    });
+    fs.writeFile(
+      path.join(__dirname, "json", "./config.json"),
+      data,
+      (error) => {
+        if (error) throw error;
+        if (DEBUG) console.log("Config file successfully updated.");
+        myEmitter.emit(
+          "log",
+          "config.setConfig()",
+          "INFO",
+          `config.json "${args[2]}": updated to "${args[3]}"`
+        );
+      }
+    );
   });
 }
 
@@ -134,4 +137,9 @@ function configApp() {
 
 module.exports = {
   configApp,
+  displayConfig,
+  resetConfig,
+  setConfig,
+  logEvents,
+  MyEmitter,
 };

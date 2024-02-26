@@ -1,100 +1,130 @@
-// Import required modules
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
-const chalk = require('chalk');
-const yargs = require('yargs');
-
-// Define templates
-const templates = {
-    folders: ['folder1', 'folder2', 'folder3'], // Replace with actual folder names
-    configjson: {},
-    tokenjson: {},
-    inittxt: '',
-    usagetxt: '',
-    configtxt: '',
-    tokentxt: ''
-};
+const fs = require("fs");
+const path = require("path");
+const fsPromises = require("fs").promises;
+const yargs = require("yargs");
+const express = require("express");
+const app = express();
+const port = 3000;
+const { folders, configjson, tokenjson } = require("./templates");
+global.DEBUG = true;
 
 // Initialize the command line arguments parser
 const args = yargs
-    .usage('Usage: node $0 --[option]')
-    .option('all', {
-        alias: 'a',
-        describe: 'Create folder structure and config file',
-        type: 'boolean'
-    })
-    .option('mk', {
-        alias: 'm',
-        describe: 'Create folder structure',
-        type: 'boolean'
-    })
-    .option('cat', {
-        alias: 'c',
-        describe: 'Create config file with default settings',
-        type: 'boolean'
-    }).argv;
+  .usage("Usage: node $0 --[option]")
+  .option("all", {
+    alias: "a",
+    describe: "Create folder structure and config file",
+    type: "boolean",
+  })
+  .option("mk", {
+    alias: "m",
+    describe: "Create folder structure",
+    type: "boolean",
+  })
+  .option("cat", {
+    alias: "c",
+    describe: "Create config file with default settings",
+    type: "boolean",
+  }).argv;
 
 // Helper function to log messages with different levels
 const log = (level, message) => {
-    const date = new Date().toISOString();
-    console.log(`[${chalk.gray(date)}] [${chalk.bold(level)}] ${message}`);
+  const date = new Date().toISOString();
+  console.log(`[${date}] [${level}] ${message}`);
 };
 
-// Helper function to create folders
-const createFolders = async () => {
-    let foldersCreatedCount = 0;
-
-    for (const folder of templates.folders) {
-        const folderPath = path.join(__dirname, folder);
-
-        if (!fs.existsSync(folderPath)) {
-            await promisify(fs.mkdir)(folderPath);
-            foldersCreatedCount++;
-        }
+function createFolders() {
+  if (DEBUG) console.log("init.createFolders()");
+  let mkcount = 0;
+  folders.forEach((element) => {
+    if (DEBUG) console.log(element);
+    try {
+      if (!fs.existsSync(path.join(__dirname, element))) {
+        fsPromises.mkdir(path.join(__dirname, element));
+        mkcount++;
+      }
+    } catch (err) {
+      console.log(err);
     }
+  });
+  if (mkcount === 0) {
+    console.log("All folders already exist.");
+  } else if (mkcount <= folders.length) {
+    console.log(mkcount + " of " + folders.length + " folders were created.");
+  } else {
+    console.log("All folders successfully created.");
+  }
+}
 
-    if (foldersCreatedCount > 0) {
-        log('INFO', `${foldersCreatedCount} folder(s) created.`);
-    } else {
-        log('INFO', 'All folders already exist.');
-    }
-};
-
-// Helper function to create files
-const createFiles = async () => {
-    const createFile = async (filePath, data) => {
-        if (!fs.existsSync(filePath)) {
-            await promisify(fs.writeFile)(filePath, data);
-            log('INFO', `${filePath} created.`);
+function createFiles() {
+  if (DEBUG) console.log("init.createFiles()");
+  try {
+    let configdata = JSON.stringify(configjson, null, 2);
+    if (!fs.existsSync(path.join(__dirname, "./json/config.json"))) {
+      fs.writeFile("./json/config.json", configdata, (err) => {
+        if (err) {
+          console.log("Error writing to config file:", err);
         } else {
-            log('INFO', `${filePath} already exists.`);
+          console.log("Data written to config file.");
         }
-    };
-
-    await createFile(path.join(__dirname, './json/config.json'), JSON.stringify(templates.configjson, null, 2));
-    await createFile(path.join(__dirname, './json/token.json'), JSON.stringify(templates.tokenjson, null, 2));
-    await createFile(path.join(__dirname, './views/usage.json'), templates.usagetxt);
-    await createFile(path.join(__dirname, './views/init.json'), templates.inittxt);
-    await createFile(path.join(__dirname, './views/config.json'), templates.configtxt);
-    await createFile(path.join(__dirname, './views/token.json'), templates.tokentxt);
-};
-
-// Initialize application
-const initializeApp = async () => {
-    if (args.all) {
-        await createFolders();
-        await createFiles();
-    } else if (args.mk) {
-        await createFolders();
-    } else if (args.cat) {
-        await createFiles();
+      });
     } else {
-        console.log(fs.readFileSync(path.join(__dirname, './views/init.txt'), 'utf-8'));
+      console.log("config file already exists.");
     }
-};
+    let tokendata = JSON.stringify(tokenjson, null, 2);
+    if (!fs.existsSync(path.join(__dirname, "./json/tokens.json"))) {
+      fs.writeFile("./json/tokens.json", tokendata, (err) => {
+        if (err) {
+          console.log("Error writing to tokens file:", err);
+        } else {
+          console.log("Data written to tokens file.");
+        }
+      });
+    } else {
+      console.log("token file already exists.");
+    }
+  } catch {
+    console.log("Error creating files.");
+  }
+}
 
-// Run the application
-initializeApp().catch(error => {
-    console.error('An error occurred:', error.message);
-});
+const myArgs = process.argv.slice(2);
+
+function initializeApp() {
+  if (DEBUG) console.log("initializeApp()");
+
+  switch (myArgs[1]) {
+    case "--all":
+      if (DEBUG) console.log("--all createFolders() & createFiles()");
+      createFolders();
+      createFiles();
+      break;
+    case "--cat":
+      if (DEBUG) console.log("--cat createFiles()");
+      createFiles();
+      break;
+    case "--mk":
+      if (DEBUG) console.log("--mk createFolders()");
+      createFolders();
+      break;
+    case "--help":
+    case "--h":
+    default:
+      fs.readFile(__dirname + "/usage.txt", (error, data) => {
+        if (error) throw error;
+        console.log(data.toString());
+      });
+  }
+
+  // Setup Express routes and start server
+  app.get("/", (req, res) => {
+    // Serve index.html from the views directory
+    res.sendFile(path.join(__dirname, "views", "index.html"));
+  });
+
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
+
+module.exports = { initializeApp };

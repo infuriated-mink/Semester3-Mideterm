@@ -1,8 +1,8 @@
 {
-  "name": "MidtermSprint",
+  "name": "Midterm Project",
   "version": "1.0.0",
-  "description": "A working CLI in JavaScript for the myapp file.",
+  "description": "A Working CLI in JS",
   "main": "myapp.js",
   "superuser": "postgres",
-  "database": "SprintDatabase"
+  "database": "midtermdb"
 }
