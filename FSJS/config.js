@@ -79,16 +79,20 @@ function setConfig() {
     }
     if (DEBUG) console.log(cfg);
     data = JSON.stringify(cfg, null, 2);
-    fs.writeFile(path.join(__dirname, "json", "./config.json"), data, (error) => {
-      if (error) throw error;
-      if (DEBUG) console.log("Config file successfully updated.");
-      myEmitter.emit(
-        "log",
-        "config.setConfig()",
-        "INFO",
-        `config.json "${args[2]}": updated to "${args[3]}"`
-      );
-    });
+    fs.writeFile(
+      path.join(__dirname, "json", "./config.json"),
+      data,
+      (error) => {
+        if (error) throw error;
+        if (DEBUG) console.log("Config file successfully updated.");
+        myEmitter.emit(
+          "log",
+          "config.setConfig()",
+          "INFO",
+          `config.json "${args[2]}": updated to "${args[3]}"`
+        );
+      }
+    );
   });
 }
 

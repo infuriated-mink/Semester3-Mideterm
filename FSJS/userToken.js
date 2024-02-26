@@ -21,58 +21,249 @@
  * - myapp token --search p <phone>
  * -
  */
+const logEvents = require("./logEvents");
+const { format } = require("date-fns");
 const fs = require("fs");
 const path = require("path");
-const { format } = require("date-fns");
 const crc32 = require("crc/crc32");
+const { EventEmitter } = require("events");
+// const callback = require("callback");
 
-const TOKENS_FILE_PATH = path.join(__dirname, "json", "tokens.json");
+const myEmitter = new EventEmitter();
+myEmitter.on("log", (event, level, msg) => logEvents(event, level, msg));
+
+const myArgs = process.argv.slice(2);
+
+// Function to count the number of tokens in the system
+const tokenCount = function () {
+  if (DEBUG) console.log("token.tokenCount()");
+  return new Promise(function (resolve, reject) {
+    fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
+      if (error) reject(error);
+      else {
+        let tokens = JSON.parse(data);
+        let count = tokens.length;
+        console.log(`Gamers with tokens: ${count}.`);
+        myEmitter.emit(
+          "log",
+          "token.tokenCount()",
+          "INFO",
+          `Token count: ${count}.`
+        );
+        resolve(count);
+      }
+    });
+  });
+};
+
+// Function to list all tokens
+function tokenList() {
+  if (DEBUG) console.log("token.tokenCount()");
+  fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
+    if (error) throw error;
+    let tokens = JSON.parse(data);
+    console.log("** User List **");
+    tokens.forEach((obj) => {
+      console.log(` * ${obj.username}: ${obj.token}`);
+    });
+    myEmitter.emit(
+      "log",
+      "token.tokenList()",
+      "INFO",
+      `Current token list was displayed.`
+    );
+  });
+}
 
 // Function to generate a new token for a user
 function newToken(username, callback) {
-  const newToken = {
-    created: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
+  let newToken = {
+    created: "1969-01-31 12:30:00",
     username: username,
     email: "user@example.com",
     phone: "5556597890",
-    token: crc32(username).toString(16),
-    expires: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
+    token: "token",
+    expires: "1969-02-03 12:30:00",
     confirmed: "tbd",
   };
 
-  // Read existing tokens from file
-  fs.readFile(TOKENS_FILE_PATH, "utf-8", (error, data) => {
-    if (error && error.code !== "ENOENT") {
-      console.error("Error reading tokens:", error);
-      return callback(error);
+  let now = new Date();
+  let expires = addDays(now, 3);
+
+  newToken.created = `${format(now, "yyyy-MM-dd HH:mm:ss")}`;
+  newToken.token = crc32(username).toString(16);
+
+  fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
+    if (error) {
+      console.error("Error reading tokens.json:", error);
+      return callback(error, null);
     }
 
-    let tokens = [];
-    if (data) {
-      try {
-        tokens = JSON.parse(data);
-      } catch (parseError) {
-        console.error("Error parsing tokens JSON:", parseError);
-        return callback(parseError);
-      }
-    }
-
-    // Add new token
+    let tokens = JSON.parse(data);
     tokens.push(newToken);
+    let userTokens = JSON.stringify(newToken);
 
-    // Write updated tokens back to file
-    fs.writeFile(TOKENS_FILE_PATH, JSON.stringify(tokens, null, 2), (err) => {
+    fs.writeFile(__dirname + "/json/tokens.json", userTokens, (err) => {
       if (err) {
-        console.error("Error writing tokens:", err);
-        return callback(err);
+        console.error("Error writing to tokens.json:", err);
+        return callback(err, null);
       }
-      
-      console.log(`New token ${newToken.token} generated for ${username}`);
+
+      console.log(`New token ${newToken.token} was created for ${username}.`);
       callback(null, newToken.token);
     });
   });
 }
 
+// Callback function to handle the result of generating a new token
+function handleNewTokenResult(error, token) {
+  if (error) {
+    console.error("Error generating new token:", error);
+    document.getElementById("token").textContent = "Error generating token";
+  } else {
+    console.log("New token generated successfully:", token);
+    document.getElementById("token").textContent = token;
+  }
+}
+
+// Function to be called when the form is submitted
+function generateToken() {
+  var username = document.getElementById("username").value;
+  newToken(username, handleNewTokenResult);
+}
+
+// Function to update a token record for a user
+function updateToken(argv) {
+  if (DEBUG) console.log("token.updateToken()");
+  if (DEBUG) console.log(argv);
+  fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
+    if (error) throw error;
+    let tokens = JSON.parse(data);
+    tokens.forEach((obj) => {
+      if (obj.username === argv[3]) {
+        if (DEBUG) console.log(obj);
+        switch (argv[2]) {
+          case "p":
+          case "P":
+            obj.phone = argv[4];
+            break;
+          case "e":
+          case "E":
+            obj.email = argv[4];
+            break;
+          default:
+        }
+        if (DEBUG) console.log(obj);
+      }
+    });
+
+    userTokens = JSON.stringify(tokens);
+    fs.writeFile(__dirname + "/json/tokens.json", userTokens, (err) => {
+      if (err) console.log(err);
+      else {
+        console.log(`Token record for ${argv[3]} was updated with ${argv[4]}.`);
+        myEmitter.emit(
+          "log",
+          "token.updateToken()",
+          "INFO",
+          `Token record for ${argv[3]} was updated with ${argv[4]}.`
+        );
+      }
+    });
+  });
+}
+
+// Function to fetch a token record for a user
+var fetchRecord = function (username) {
+  if (DEBUG) console.log("token.fetchRecord()");
+  fs.readFile(__dirname + "/json/tokens.json", "utf-8", (error, data) => {
+    if (error) console.log(error);
+    else {
+      let tokens = JSON.parse(data);
+      tokens.forEach((obj) => {
+        if (obj.username === username) {
+          console.log(obj);
+          myEmitter.emit(
+            "log",
+            "token.fetchRecord()",
+            "INFO",
+            `Token record for ${username} was displayed.`
+          );
+        }
+      });
+    }
+  });
+};
+
+// Function to search for a token
+function searchToken() {
+  if (DEBUG) console.log("token.searchToken()");
+  myEmitter.emit(
+    "log",
+    "token.searchToken()",
+    "INFO",
+    `Token was found for xxx.`
+  );
+}
+
+// Function to add days to a date
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+// Function to manage the CLI options for the token module
+function tokenApp() {
+  if (DEBUG) console.log("tokenApp()");
+  myEmitter.emit(
+    "log",
+    "token.tokenApp()",
+    "INFO",
+    "token option was called by CLI"
+  );
+
+  switch (myArgs[1]) {
+    case "--count":
+      tokenCount();
+      break;
+    case "--list":
+      tokenList();
+      break;
+    case "--new":
+      newToken(myArgs[2]);
+      break;
+    case "--upd":
+      updateToken(myArgs);
+      break;
+    case "--fetch":
+      fetchRecord(myArgs[2]);
+      break;
+    case "--search":
+      searchToken();
+      break;
+    case "--help":
+    case "--h":
+    default:
+      fs.readFile(__dirname + "/views/token.txt", (error, data) => {
+        if (error) throw error;
+        console.log(data.toString());
+      });
+      myEmitter.emit(
+        "log",
+        "token.tokenApp()",
+        "INFO",
+        "invalid CLI option, usage displayed"
+      );
+  }
+}
+
 module.exports = {
-  newToken
+  tokenApp,
+  newToken,
+  tokenCount,
+  fetchRecord,
+  searchToken,
+  updateToken,
+  generateToken,
 };
