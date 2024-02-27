@@ -1,4 +1,4 @@
-/* Basic CSS for the index.html */
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Inter&family=Karantina&family=Poppins:wght@100&display=swap");
 
 /* Body styles */
 body {
@@ -11,13 +11,24 @@ body {
 
 /* Header styles */
 header {
-  background-color: #CDC0FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cdc0ff;
   color: #fefa98;
   padding: 10px 0;
   text-align: center;
   height: 158;
   width: 1423;
-  border: 5px solid #FBFE60;
+  border: 5px solid #fbfe60;
+}
+
+
+.headerTitle {
+  font-size: 80px;
+  font-family: "Carter One", system-ui;
+  -webkit-text-stroke: 1px black;
+  color: #fefa98;
 }
 .container1 {
   display: flex;
