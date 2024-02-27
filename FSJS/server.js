@@ -24,13 +24,9 @@ app.post("/new", (req, res) => {
       console.error("Error generating token:", error);
       res.status(500).send("Error generating token");
     } else {
-      res.send(__dirname + "/views/newusertoken.html");
+      res.send(`${username} token is ${theToken}`);
     }
   });
-});
-
-app.get("/count", (req, res) => {
-  res.sendFile(__dirname + "/views/count.html");
 });
 
 // Route handler for GET requests to "/count"
@@ -42,6 +38,12 @@ app.get("/count", async (req, res) => {
 // Route handler for GET requests to "/"
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
+});
+
+// Error handling for sending files
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
 
 // Start the server
