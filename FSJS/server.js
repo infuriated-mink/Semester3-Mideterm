@@ -18,7 +18,7 @@ app.get("/new", (req, res) => {
 
 // Route handler for POST requests to "/new"
 app.post("/new", (req, res) => {
-  const username = req.body.username; // Assuming a form field named 'username'
+  const username = req.body.username;
   newToken(username, (error, theToken) => {
     if (error) {
       console.error("Error generating token:", error);
@@ -34,9 +34,14 @@ app.get("/count", (req, res) => {
 });
 
 // Route handler for GET requests to "/count"
-app.post("/count", (req, res) => {
-  const theCount = tokenCount();
-  res.send(__dirname + "/views/count.html");
+app.get("/count", async (req, res) => {
+  const theCount = await tokenCount();
+  res.sendFile(__dirname + "/views/count.html");
+});
+
+// Route handler for GET requests to "/"
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
 });
 
 // Start the server
