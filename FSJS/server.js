@@ -9,46 +9,34 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files from the 'views' directory
-app.use(express.static('views'));
+app.use(express.static("views"));
 
 // Route handler for GET requests to "/new"
-app.get('/new', (req, res) => {
-  res.sendFile(__dirname + '/views/newusertoken.html');
+app.get("/new", (req, res) => {
+  res.sendFile(__dirname + "/views/newusertoken.html");
 });
 
 // Route handler for POST requests to "/new"
-app.post('/new', (req, res) => {
+app.post("/new", (req, res) => {
   const username = req.body.username; // Assuming a form field named 'username'
   newToken(username, (error, theToken) => {
     if (error) {
       console.error("Error generating token:", error);
       res.status(500).send("Error generating token");
     } else {
-      res.send(`
-        <!doctype html>
-        <html>
-        <body>
-            ${username} token is ${theToken} <br />
-            <a href="/">[home]</a>
-        </body>
-        </html>
-      `);
+      res.send(__dirname + "/views/newusertoken.html");
     }
   });
 });
 
+app.get("/count", (req, res) => {
+  res.sendFile(__dirname + "/views/count.html");
+});
+
 // Route handler for GET requests to "/count"
-app.get('/count', async (req, res) => {
-  const theCount = await tokenCount();
-  res.send(`
-    <!doctype html>
-    <html>
-    <body>
-        Token count is ${theCount} <br />
-        <a href="/">[home]</a>
-    </body>
-    </html>
-  `);
+app.post("/count", (req, res) => {
+  const theCount = tokenCount();
+  res.send(__dirname + "/views/count.html");
 });
 
 // Start the server
