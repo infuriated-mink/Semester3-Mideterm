@@ -1,80 +1,55 @@
-global.DEBUG = false;
-const http = require("http");
+const express = require("express");
 const fs = require("fs");
 const { parse } = require("querystring");
 const { newToken, tokenCount } = require("./userToken");
 
-const server = http.createServer(async (req, res) => {
-  let path = "./views/";
-  switch (req.url) {
-    case "/":
-      path += "index.html";
-      res.statusCode = 200;
-      fetchFile(path, res);
-      break;
-    case "/new":
-      if (req.method === "POST") {
-        collectRequestData(req, (result) => {
-          newToken(result.username, (error, theToken) => {
-            if (error) {
-              console.error("Error generating token:", error);
-              res.statusCode = 500;
-              res.end("Error generating token");
-            } else {
-              res.end(`
-                <!doctype html>
-                <html>
-                <body>
-                    ${result.username} token is ${theToken} <br />
-                    <a href="http://localhost:3000">[home]</a>
-                </body>
-                </html>
-              `);
-            }
-          });
-        });
+const app = express();
+
+// Serve static files from the 'views' directory
+app.use(express.static('views'));
+
+// Handle POST requests to '/new'
+app.post('/new', (req, res) => {
+  collectRequestData(req, (result) => {
+    newToken(result.username, (error, theToken) => {
+      if (error) {
+        console.error("Error generating token:", error);
+        res.statusCode = 500;
+        res.end("Error generating token");
       } else {
-        path += "newusertoken.html";
-        res.statusCode = 200;
-        fetchFile(path, res);
+        res.end(`
+          <!doctype html>
+          <html>
+          <body>
+              ${result.username} token is ${theToken} <br />
+              <a href="http://localhost:3000">[home]</a>
+          </body>
+          </html>
+        `);
       }
-      break;
-    case "/count":
-      var theCount = await tokenCount();
-      res.end(`
-                <!doctype html>
-                <html>
-                <body>
-                    Token count is ${theCount} <br />
-                    <a href="http://localhost:3000">[home]</a>
-                </body>
-                </html>
-            `);
-      break;
-    default:
-      res.statusCode = 404;
-      res.end("Not Found");
-  }
-});
-
-server.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
-});
-
-function fetchFile(path, res) {
-  fs.readFile(path, (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      res.statusCode = 500;
-      res.end("Internal Server Error");
-    } else {
-      if (DEBUG) console.log("File was served.");
-      res.writeHead(res.statusCode, { "Content-Type": "text/html" });
-      res.write(data);
-      res.end();
-    }
+    });
   });
-}
+});
+
+// Handle GET requests to '/count'
+app.get('/count', async (req, res) => {
+  var theCount = await tokenCount();
+  res.end(`
+    <!doctype html>
+    <html>
+    <body>
+        Token count is ${theCount} <br />
+        <a href="http://localhost:3000">[home]</a>
+    </body>
+    </html>
+  `);
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
 function collectRequestData(request, callback) {
   const FORM_URLENCODED = "application/x-www-form-urlencoded";
