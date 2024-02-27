@@ -37,17 +37,22 @@ body {
 
   .button {
     background-color: #CDC0FF;
-    height: 75;
-    width: 300;
+    height: 75px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
     align-items: center;
     color: #fefa98;
-    -webkit-text-stroke: black 1px;
     font-size: 36px;
-    padding-top: 20px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    -webkit-text-stroke: 1px black; /* For WebKit/Blink browsers like Chrome and Safari */
+    text-stroke: 1px black; /* Standard property */
+    text-decoration: none; /* Remove underline */
   }
+  
+
   h2 {
     color: rgb(170, 129, 246);
     text-align: center;
