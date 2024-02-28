@@ -8,6 +8,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Set EJS as the view engine
+app.set("view engine", "ejs");
+
 // Serve static files from the 'views' directory
 app.use(express.static("views"));
 
@@ -31,8 +34,13 @@ app.post("/new", (req, res) => {
 
 // Route handler for GET requests to "/count"
 app.get("/count", async (req, res) => {
-  const theCount = await tokenCount();
-  res.sendFile(__dirname + "/views/count.html");
+  try {
+    const theCount = await tokenCount();
+    res.render("count", { tokenCount: theCount }); 
+  } catch (error) {
+    console.error("Error fetching token count:", error);
+    res.status(500).send("Error fetching token count");
+  }
 });
 
 // Route handler for GET requests to "/"
