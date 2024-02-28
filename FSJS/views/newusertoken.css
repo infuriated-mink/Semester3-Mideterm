@@ -5,25 +5,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ece8fd;
+  background-color: #ECE8FD;
   width: 1423;
-}
-
-label {
-  font-family: "Carter One", system-ui;
-  font-size: 26px;
-  color: #fefa98;
-  -webkit-text-stroke: 1px black;
-}
-
-input {
-  margin-top: 10px;
-}
-
-#inputID {
-  height: 40;
-  width: 200;
-  border-radius: 8px;
 }
 
 /* Header styles */
@@ -40,6 +23,7 @@ header {
   border: 5px solid #fbfe60;
 }
 
+
 .headerTitle {
   font-size: 80px;
   font-family: "Carter One", system-ui;
@@ -48,47 +32,37 @@ header {
 }
 .container1 {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
 }
 
 .box1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   background-color: rgba(202, 202, 202, 0.5);
-  /* text-align: center; */
+  text-align: center;
   height: 400;
   width: 550;
-  border: 5px solid #fbfe60;
+  border: 5px solid #FBFE60;
   border-radius: 40px;
 }
 
-button:hover {
-  text-decoration: none;
-  background-color: #a694ed;
-}
-
-button {
+.button1 {
+  background-color: #CDC0FF;
+  height: 75px;
+  width: 300px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: #cdc0ff;
-  height: 75;
-  width: 200;
-  margin-top: 20px;
-  margin-bottom: 20px;
   align-items: center;
   color: #fefa98;
   font-size: 36px;
-  border: 2px solid #fefa98;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
-  font-family: "Carter One", system-ui;
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 1px black; /* For WebKit/Blink browsers like Chrome and Safari */
+  text-stroke: 1px black; /* Standard property */
+  text-decoration: none; /* Remove underline */
 }
+
 
 h2 {
   color: rgb(170, 129, 246);
@@ -100,6 +74,11 @@ a {
   color: #fefa98;
   text-decoration: none;
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
 
 /* Responsive styles */
 @media (max-width: 768px) {
