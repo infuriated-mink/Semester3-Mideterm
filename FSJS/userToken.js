@@ -27,6 +27,7 @@ const fs = require("fs");
 const path = require("path");
 const crc32 = require("crc/crc32");
 const { EventEmitter } = require("events");
+const DEBUG = true;
 // const callback = require("callback");
 
 const myEmitter = new EventEmitter();
