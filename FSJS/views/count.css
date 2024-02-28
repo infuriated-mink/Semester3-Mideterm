@@ -85,10 +85,18 @@ button {
   cursor: pointer;
 }
 
-h2 {
+p {
   color: rgb(170, 129, 246);
   text-align: center;
 }
+
+h2 {
+  color: #fefa98;
+  text-decoration: none;
+  font-family: "Carter One", system-ui;
+  -webkit-text-stroke: 1px black;
+}
+
 
 /* Anchor styles */
 a {
