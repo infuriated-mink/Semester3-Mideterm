@@ -15,9 +15,7 @@ app.set("view engine", "ejs");
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
-app.get("/", (req, res) => {
-  res.render("index"); // Render the EJS file
-});app.use(express.static('public'));
+
 // Logging middleware
 app.use((req, res, next) => {
   const logMessage = `${new Date().toISOString()} - ${req.method} ${req.url}\n`;
@@ -37,7 +35,7 @@ app.use((req, res, next) => {
 
 // Route handler for GET requests to "/new"
 app.get("/new", (req, res) => {
-  res.render("newusertoken"); // Render the EJS file
+  res.render("newusertoken", { message: "" }); 
 });
 
 // Route handler for POST requests to "/new"
@@ -48,7 +46,8 @@ app.post("/new", (req, res) => {
       console.error("Error generating token:", error);
       res.status(500).send("Error generating token");
     } else {
-      res.send(`${username} token is ${theToken}`);
+      // Render the newusertoken template with the message
+      res.render("newusertoken", { message: `Token was created for ${username}: ${theToken}` });
     }
   });
 });
@@ -66,10 +65,10 @@ app.get("/count", async (req, res) => {
 
 // Route handler for GET requests to "/"
 app.get("/", (req, res) => {
-  res.render("index"); // Render the EJS file
+  res.render("index"); // Render the index.ejs template
 });
 
-// Error handling for sending files
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
