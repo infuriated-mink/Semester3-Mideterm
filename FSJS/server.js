@@ -3,8 +3,6 @@ const bodyParser = require("body-parser");
 const { newToken, tokenCount } = require("./userToken");
 const fs = require("fs");
 const path = require("path");
-const fs = require("fs");
-const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
