@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { newToken, tokenCount } = require("./userToken");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +15,23 @@ app.set("view engine", "ejs");
 
 // Serve static files from the 'views' directory
 app.use(express.static("views"));
+
+// Logging middleware
+app.use((req, res, next) => {
+  const logMessage = `${new Date().toISOString()} - ${req.method} ${req.url}\n`;
+
+  // Log to console
+  console.log(logMessage);
+
+  // Log to file
+  fs.appendFile(path.join(__dirname, "logs/access.log"), logMessage, (err) => {
+    if (err) {
+      console.error("Error appending to access log:", err);
+    }
+  });
+
+  next();
+});
 
 // Route handler for GET requests to "/new"
 app.get("/new", (req, res) => {
