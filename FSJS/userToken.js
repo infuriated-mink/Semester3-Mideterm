@@ -75,21 +75,19 @@ function tokenList() {
     );
   });
 }
-
-// Function to generate a new token for a user
 function newToken(username) {
+  let now = new Date();
+  let expires = addDays(now, 3);
+
   let newToken = {
-    created: "",
+    created: format(now, "yyyy-MM-dd HH:mm:ss"),
     username: username,
     email: "default@gmail.com",
     phone: "9999999999",
-    token: "token",
-    expires: "",
+    token: crc32(username).toString(16),
+    expires: format(expires, "yyyy-MM-dd HH:mm:ss"),
     confirmed: "tbd",
   };
-
-  let now = new Date();
-  let expires = addDays(now, 3);
 
   newToken.created = `${format(now, "yyyy-MM-dd HH:mm:ss")}`;
   newToken.token = crc32(username).toString(16);
@@ -120,7 +118,9 @@ function newToken(username) {
         );
       }
 
-      console.log(`New token ${newToken.token} was created for ${username}.`);
+      console.log(
+        `New token ${newToken.token} was created for ${username} expires on ${newToken.expires}.`
+      );
     });
   });
 }

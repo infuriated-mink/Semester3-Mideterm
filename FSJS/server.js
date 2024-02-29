@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const { newToken, tokenCount } = require("./userToken");
 const fs = require("fs");
 const path = require("path");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +15,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => {
+  res.render("index"); // Render the EJS file
+});
+app.use(express.static("public"));
+// Logging middleware
+app.use((req, res, next) => {
+  const logMessage = `${new Date().toISOString()} - ${req.method} ${req.url}\n`;
+
+  // Log to console
+  console.log(logMessage);
+
+  // Log to file
+  fs.appendFile(path.join(__dirname, "logs/access.log"), logMessage, (err) => {
+    if (err) {
+      console.error("Error appending to access log:", err);
+    }
+  });
+
+  next();
+});
 // Serve static files from the 'public' directory
 app.use(express.static("public"));
 
@@ -35,7 +59,7 @@ app.use((req, res, next) => {
 
 // Route handler for GET requests to "/new"
 app.get("/new", (req, res) => {
-  res.sendFile(__dirname + "/views/newusertoken.html");
+  res.render("newusertoken"); // Render the EJS file
 });
 
 // Route handler for POST requests to "/new"
@@ -64,7 +88,27 @@ app.get("/count", async (req, res) => {
 
 // Route handler for GET requests to "/"
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.render("index"); // Render the EJS file
+});
+
+app.get("/update", (req, res) => {
+  res.render("update");
+});
+
+app.post("/update", (req, res) => {
+  const username = req.body.username;
+  const field = req.body.field.toUpperCase(); // Convert field to uppercase
+  const value = req.body.value;
+
+  // Call your updateToken function to update the token
+  updateToken(username, field, value, (error) => {
+    if (error) {
+      console.error("Error updating token:", error);
+      res.status(500).send("Error updating token");
+    } else {
+      res.send(`Token record for ${username} was updated with ${value}.`);
+    }
+  });
 });
 
 app.get("/update", (req, res) => {
