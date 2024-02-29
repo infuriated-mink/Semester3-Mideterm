@@ -7,7 +7,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #ece8fd;
-  width: 1423px; 
+  width: 1423px;
 }
 
 /* Header styles */
@@ -43,17 +43,17 @@ nav {
   height: 100vh;
 }
 label {
-    color: #fefa98;
-    text-decoration: none;
-    font-family: "Carter One", system-ui;
-    -webkit-text-stroke: 1px black;
-    font-size: 20px;
+  color: #fefa98;
+  text-decoration: none;
+  font-family: "Carter One", system-ui;
+  -webkit-text-stroke: 1px black;
+  font-size: 20px;
 }
 
 input {
-    height: 30px;
-    width: 150px;
-    margin-top: 10px;
+  height: 30px;
+  width: 150px;
+  margin-top: 10px;
 }
 
 .box1 {
@@ -79,8 +79,8 @@ button {
   align-items: center;
   justify-content: center;
   background-color: #cdc0ff;
-  height: 50px; 
-  width: 160px; 
+  height: 50px;
+  width: 160px;
   margin-top: 20px;
   margin-bottom: 20px;
   color: #fefa98;
@@ -104,7 +104,6 @@ a {
 }
 ul {
   list-style: none;
-
 }
 
 a:hover {
