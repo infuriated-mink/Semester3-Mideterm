@@ -13,9 +13,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 
-// Serve static files from the 'views' directory
-app.use(express.static("views"));
-
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => {
+  res.render("index"); // Render the EJS file
+});app.use(express.static('public'));
 // Logging middleware
 app.use((req, res, next) => {
   const logMessage = `${new Date().toISOString()} - ${req.method} ${req.url}\n`;
@@ -35,7 +37,7 @@ app.use((req, res, next) => {
 
 // Route handler for GET requests to "/new"
 app.get("/new", (req, res) => {
-  res.sendFile(__dirname + "/views/newusertoken.html");
+  res.render("newusertoken"); // Render the EJS file
 });
 
 // Route handler for POST requests to "/new"
@@ -55,7 +57,7 @@ app.post("/new", (req, res) => {
 app.get("/count", async (req, res) => {
   try {
     const theCount = await tokenCount();
-    res.render("count", { tokenCount: theCount }); 
+    res.render("count", { tokenCount: theCount });
   } catch (error) {
     console.error("Error fetching token count:", error);
     res.status(500).send("Error fetching token count");
@@ -64,7 +66,7 @@ app.get("/count", async (req, res) => {
 
 // Route handler for GET requests to "/"
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.render("index"); // Render the EJS file
 });
 
 // Error handling for sending files
