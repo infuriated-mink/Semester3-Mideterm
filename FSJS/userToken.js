@@ -89,7 +89,6 @@ function newToken(username) {
     confirmed: "tbd",
   };
 
-
   newToken.created = `${format(now, "yyyy-MM-dd HH:mm:ss")}`;
   newToken.token = crc32(username).toString(16);
 
@@ -119,7 +118,9 @@ function newToken(username) {
         );
       }
 
-      console.log(`New token ${newToken.token} was created for ${username} expires on ${newToken.expires}.`);
+      console.log(
+        `New token ${newToken.token} was created for ${username} expires on ${newToken.expires}.`
+      );
     });
   });
 }

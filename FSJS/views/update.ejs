@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Token Information</title>
+  </head>
+  <body>
+    <h1>Update Token Information</h1>
+    <form id="updateForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required /><br /><br />
+
+      <label for="email">New Email:</label>
+      <input type="email" id="email" name="email" /><br /><br />
+
+      <label for="phone">New Phone Number:</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        pattern="[0-9]{10}"
+      /><br /><br />
+
+      <input type="submit" value="Update" />
+    </form>
+
+    <script>
+      document
+        .getElementById("updateForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          // Get form inputs
+          const username = document.getElementById("username").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+
+          // Construct payload
+          const payload = {
+            username: username,
+            email: email,
+            phone: phone,
+          };
+
+          // Send payload to server using fetch API
+          fetch("/updateToken", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Token information updated successfully:", data);
+              // Handle success response if needed
+            })
+            .catch((error) => {
+              console.error("Error updating token information:", error);
+              // Handle error response if needed
+            });
+        });
+    </script>
+  </body>
+</html>
